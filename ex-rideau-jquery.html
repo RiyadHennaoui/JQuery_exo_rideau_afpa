@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Trade+Winds"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="ex-rideau-jquery.css" rel="stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+      jQuery.fn.visibilityToggle = function () {
+        return this.css("visibility", function (i, visibility) {
+          return visibility == "visible" ? "hidden" : "visible";
+        });
+      };
+
+      $(document).ready(function () {
+        // mettre le script ici
+
+        var widthContainer = $("section > div").width();
+        var heightContainer = $("section > div").height();
+        var taillePolice = $("#rideau > h1").css("fontSize");
+
+        console.log("taille police", taillePolice);
+
+        $("img").width(widthContainer);
+        $("#rideau").width(widthContainer).height(heightContainer);
+
+        $("aside > button:first-of-type").click(function () {
+          widthContainer += 20;
+          heightContainer += 20;
+          taillePolice += 100;
+
+          $("section > div").width(widthContainer).height(heightContainer);
+          $("img").width(widthContainer).height(heightContainer);
+
+          $("#rideau > h1").css("fontSize", taillePolice);
+        });
+        $("aside > button:nth-of-type(2)").click(function () {
+          widthContainer -= 20;
+          heightContainer -= 20;
+          $("section > div").width(widthContainer).height(heightContainer);
+          $("img").width(widthContainer).height(heightContainer);
+        });
+        $("aside > button:last-of-type").click(function () {
+          console.log("ici");
+          $("#rideau").visibilityToggle();
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <aside>
+      <button>+</button>
+      <button>-</button>
+      <br />
+      <button>#</button>
+    </aside>
+    <section>
+      <div><img src="montagne.jpg" /></div>
+      <div id="rideau">
+        <h1>Mon Rideau</h1>
+      </div>
+    </section>
+  </body>
+</html>
